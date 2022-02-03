@@ -21,8 +21,8 @@ Webjørn Melle, Jeffrey Runge, Erica Head, Stéphane Plourde, Claudia Castellani
 _Progress in Oceanography_, **129:** 244-284. DOI: [https://doi.org/10.1016/j.pocean.2014.04.026](https://doi.org/10.1016/j.pocean.2014.04.026)
 https://www.sciencedirect.com/science/article/pii/S0079661114000743
 
-Wilson Robert J., Heath Michael R., Speirs Douglas C. (2016). Spatial Modeling of Calanus finmarchicus and Calanus helgolandicus: Parameter Differences Explain Differences in Biogeography, _Frontiers in Marine Science_, **3**           
+Wilson Robert J., Heath Michael R., Speirs Douglas C. (2016). Spatial Modeling of Calanus finmarchicus and Calanus helgolandicus: Parameter Differences Explain Differences in Biogeography, _Frontiers in Marine Science_, **3**                
 https://www.frontiersin.org/articles/10.3389/fmars.2016.00157/full
 
-Shuang Gao, Solfrid Sætre Hjøllo, Tone Falkenhaug, Espen Strand, Martin Edwards, Morten D. Skogen (2021). Overwintering distribution, inflow patterns and sustainability of Calanus finmarchicus in the North Sea, _Progress in Oceanography,**194**, DOI: [10.1016/j.pocean.2021.102567](https://doi.org/10.1016/j.pocean.2021.102567).       
+Shuang Gao, Solfrid Sætre Hjøllo, Tone Falkenhaug, Espen Strand, Martin Edwards, Morten D. Skogen (2021). Overwintering distribution, inflow patterns and sustainability of Calanus finmarchicus in the North Sea, _Progress in Oceanography_,**194**, DOI: [10.1016/j.pocean.2021.102567](https://doi.org/10.1016/j.pocean.2021.102567).        
 https://www.sciencedirect.com/science/article/pii/S0079661121000549

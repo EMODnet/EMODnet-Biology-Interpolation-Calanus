@@ -1,6 +1,25 @@
 # EMODnet-Bio-Interp-Calanus
 Spatial interpolation of Calanus observation in the North Sea.
 
+## CPR data
+
+CPR stands for Continuous Plankton Recorder. It is an instrument, towed by volunteer
+merchant ships, designed to capture plankton samples. CPR datasets are unique
+in the sense that data have been acquired in a consistent way (same method)
+for more that 70 years.
+
+### How does it work?
+
+In the instrument, plankton collected by continuously moving bands of filter silk
+is filtered and then the silk, stored in a cassette, is analysed in a laboratory.
+
+__More info:__ https://www.cprsurvey.org/services/the-continuous-plankton-recorder/
+
+### Typical scales
+
+- Each sample represents 10 nautical miles (< 20 km) of towing.
+- The instrument towed at depth of about 5 -10 metres.
+- Speed is up to 25 knots (46 km/h)
 ## Data distribution
 
 _Finmarchicus_             |  Helgolandicus

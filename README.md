@@ -20,7 +20,14 @@ __More info:__ https://www.cprsurvey.org/services/the-continuous-plankton-record
 - Each sample represents 10 nautical miles (< 20 km) of towing.
 - The instrument towed at depth of about 5 -10 metres.
 - Speed is up to 25 knots (46 km/h)
-## Data distribution
+
+## The data set
+
+### Domain of interest
+
+-20.5, 11.75, 41.25, 67.
+
+### Data distribution
 
 _Finmarchicus_             |  Helgolandicus
 :-------------------------:|:-------------------------:

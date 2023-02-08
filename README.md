@@ -3,7 +3,7 @@ Spatial interpolation of Calanus observation in the North Sea.
 
 ## CPR data
 
-CPR stands for Continuous Plankton Recorder. It is an instrument, towed by volunteer
+__CPR__ stands for Continuous Plankton Recorder. It is an instrument, towed by volunteer
 merchant ships, designed to capture plankton samples. CPR datasets are unique
 in the sense that data have been acquired in a consistent way (same method)
 for more that 70 years.
@@ -25,7 +25,7 @@ __More info:__ https://www.cprsurvey.org/services/the-continuous-plankton-record
 
 ### Domain of interest
 
--20.5, 11.75, 41.25, 67.
+41.25°N - 67.°N, 20.5°W - 11.75°E
 
 ### Data distribution
 

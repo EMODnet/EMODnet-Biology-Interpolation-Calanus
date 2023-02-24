@@ -1,4 +1,10 @@
 # EMODnet-Bio-Interp-Calanus
+
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![DOI](https://zenodo.org/badge/452690474.svg)](https://zenodo.org/badge/latestdoi/452690474)
+![GitHub top language](https://img.shields.io/github/languages/top/gher-uliege/EMODnet-Bio-Interp-Calanus)
+
+
 Spatial interpolation of Calanus observation in the North Sea.
 
 ## CPR data
@@ -40,6 +46,10 @@ L = 2.5, epsilon2 = 5.
 _Finmarchicus_             |  Helgolandicus
 :-------------------------:|:-------------------------:
 ![analysis_calanus_finmarchicus](https://user-images.githubusercontent.com/11868914/151572917-f1df7bee-382d-4d88-85f4-ea204ceba5a7.jpg) | ![analysis_calanus_helgolandicus](https://user-images.githubusercontent.com/11868914/151572924-14459d9f-e999-49b4-9ab9-dfa4674a8f27.jpg)
+
+## Related projects
+
+[`DIVAnd`](https://github.com/gher-uliege/DIVAnd.jl) [![DOI](https://zenodo.org/badge/79277337.svg)](https://zenodo.org/badge/latestdoi/79277337)
 
 ## Useful references
 

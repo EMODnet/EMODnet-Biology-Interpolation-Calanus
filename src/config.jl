@@ -1,4 +1,4 @@
-# 
+# Configuration file for the analysis
 title = "Calanus interpolation parameters"
 
 # Domain and resolution
@@ -13,7 +13,8 @@ datafigdir = "../figures/observations/"
 resfigdir = "../figures/L025/"
 wodfigdir = "../figures/"
 resdir = "../results/L025/"
-resdirm = "../results/month/L025"
+resdirnc = joinpath(resdir, "netCDF")
+resdirtif = joinpath(resdir, "GeoTIFF")
 
 # Files 
 datafile = "MBA_CPRdata_Emodnet_21Jan22.csv"
@@ -23,5 +24,5 @@ bathyfileURL = "https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download"
 
 # Colors 
 # (to keep homogeneity accross the figures)
-mycolor = "#6667AB"
-mycolor2 = "#456A30" # Green treetop
+mycolor = "#6667AB" ;
+mycolor2 = "#456A30"; # Green treetop

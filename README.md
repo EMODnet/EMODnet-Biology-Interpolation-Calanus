@@ -4,15 +4,22 @@
 [![DOI](https://zenodo.org/badge/452690474.svg)](https://zenodo.org/badge/latestdoi/452690474)
 ![GitHub top language](https://img.shields.io/github/languages/top/gher-uliege/EMODnet-Bio-Interp-Calanus)
 
+Spatial interpolation of _Calanus finmarchicus_ and _Calanus helgolandicus_ observations in the North Sea using the [`DIVAnd`](https://github.com/gher-uliege/DIVAnd.jl) software tool.
 
-Spatial interpolation of Calanus observation in the North Sea.
+## Objectives
 
-## CPR data
+The objective of this project is twofold:
+1. Create gridded maps of _Calanus finmarchicus_ and _Calanus helgolandicus_ abundances and
+2. Develop and apply a multivariate approach in the interpolatio method.
+
+## Data
 
 __CPR__ stands for Continuous Plankton Recorder. It is an instrument, towed by volunteer
 merchant ships, designed to capture plankton samples. CPR datasets are unique
 in the sense that data have been acquired in a consistent way (same method)
 for more that 70 years.
+
+The domain of interest ranges from 41.25°N to 67.0°N and from 20.5°W to 11.75°E.
 
 ### How does it work?
 
@@ -27,19 +34,15 @@ __More info:__ https://www.cprsurvey.org/services/the-continuous-plankton-record
 - The instrument towed at depth of about 5 -10 metres.
 - Speed is up to 25 knots (46 km/h)
 
-## The data set
-
-### Domain of interest
-
-41.25°N - 67.°N, 20.5°W - 11.75°E
-
 ### Data distribution
 
 _Finmarchicus_             |  Helgolandicus
 :-------------------------:|:-------------------------:
 ![count_calanus_finmarchicus](https://user-images.githubusercontent.com/11868914/151570410-7dad2e00-ef08-452a-9076-8ebd9cadfc36.jpg) | ![count_calanus_helgolandicus](https://user-images.githubusercontent.com/11868914/151571375-6a2ef5c4-cf55-47f4-933c-f83be5fb5aec.jpg)
 
-## Basic analysis
+## Results
+
+### Basic analysis
 
 L = 2.5, epsilon2 = 5.
 

@@ -44,15 +44,18 @@ _Finmarchicus_             |  Helgolandicus
 
 ### Basic analysis
 
-L = 2.5, epsilon2 = 5.
+* L = 2.5
+* epsilon2 = 5.
 
-_Finmarchicus_             |  Helgolandicus
+_Finmarchicus_             |  _Helgolandicus_
 :-------------------------:|:-------------------------:
 ![analysis_calanus_finmarchicus](https://user-images.githubusercontent.com/11868914/151572917-f1df7bee-382d-4d88-85f4-ea204ceba5a7.jpg) | ![analysis_calanus_helgolandicus](https://user-images.githubusercontent.com/11868914/151572924-14459d9f-e999-49b4-9ab9-dfa4674a8f27.jpg)
 
-## Related projects
+### Output formats
+The formats are adopted for this project:
+1. netCDF, following the Climate and Forecast conventions for the metadata and attributes
+2. geoTIFF, more widely used in different scientific communities.
 
-[`DIVAnd`](https://github.com/gher-uliege/DIVAnd.jl) [![DOI](https://zenodo.org/badge/79277337.svg)](https://zenodo.org/badge/latestdoi/79277337)
 
 ## Useful references
 

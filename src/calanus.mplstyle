@@ -10,4 +10,5 @@ savefig.facecolor: white       # figure face color when saving
 savefig.edgecolor: white        # figure edge color when saving
 savefig.format:    jpg         # {png, ps, pdf, svg}
 savefig.bbox:      tight
-
+font.family:  serif
+font.serif: Times New Roman

@@ -7,7 +7,7 @@ mpl.style.use("../src/calanus.mplstyle")
 # Type of analysis
 run_year = true
 run_month = true
-analysistype = ""
+analysistype = "multivariate"
 
 title = "Calanus interpolation parameters"
 
@@ -39,6 +39,7 @@ isdir(resdirnc) ? @debug("already there") : mkpath(resdirnc)
 isdir(resdirtif) ? @debug("already there") : mkpath(resdirtif)
 isdir(figdir) ? @debug("already there") : mkpath(figdir)
 isdir(datafigdir) ? @debug("already there") : mkpath(datafigdir)
+isdir(wodfigdir) ? @debug("already there") : mkpath(wodfigdir)
 
 # Files 
 datafile = joinpath(datadir, "MBA_CPRdata_Emodnet_21Jan22.csv")

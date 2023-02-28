@@ -1,6 +1,7 @@
 module InterpCalanus
 
 using Dates
+using Statistics
 using DelimitedFiles 
 using NCDatasets
 using GeoArrays
@@ -10,7 +11,7 @@ if isfile("../Manifest.toml")
     juliaversion = TOML.parsefile("../Manifest.toml")["julia_version"]
     DIVAndversion = TOML.parsefile("../Manifest.toml")["deps"]["DIVAnd"][1]["version"]
 else
-    juliaversion = "1.8.0"
+    juliaversion = "1.8.5"
     DIVAndversion = "2.7.9"
 end
 
@@ -73,7 +74,7 @@ function count_years_months(dates::Array)
     for mm in 1:12
         monthcount[mm] = sum(month .== mm)
     end
-       
+
     return yearcount, monthcount
 end
 
@@ -206,13 +207,13 @@ julia> create_nc_results_time("Bacteriastrum_interp.nc", lons, lats)
 ```
 """
 function create_nc_results_time(filename::String, lons, lats, speciesname="";
-                           valex=-999.9,
-                           varname::String = "abundance",
-                           long_name::String = "Interpolated abundance",
-						   domain::Array = [-180., 180., -90., 90.],
-						   aphiaID::Int32 = 0,
-                           L, epsilon2
-                           )
+    valex=-999.9,
+    varname::String = "abundance",
+    long_name::String = "Interpolated abundance",
+	domain::Array = [-180., 180., -90., 90.],
+	aphiaID::Int32 = Int32(0),
+    L, epsilon2
+    )
     Dataset(filename, "c") do ds
 
         # Dimensions
@@ -223,8 +224,8 @@ function create_nc_results_time(filename::String, lons, lats, speciesname="";
         # Declare variables
 		nccrs = defVar(ds, "crs", Int64, ())
     	nccrs.attrib["grid_mapping_name"] = "latitude_longitude"
-    	nccrs.attrib["semi_major_axis"] = 6371000.0 ;
-    	nccrs.attrib["inverse_flattening"] = 0 ;
+    	nccrs.attrib["semi_major_axis"] = 6371000.0 
+    	nccrs.attrib["inverse_flattening"] = 0 
 
         ncfield = defVar(ds, varname, Float64, ("lon", "lat", "time"))
         ncfield.attrib["missing_value"] = Float64(valex)
@@ -346,6 +347,50 @@ function write_geotiff(filename::String, field::Array, domain::Vector)
     GeoArrays.write!(filename, ga)
 end
 
+"""
+    read_results(resfile)
+
+Read the results from a netCDF file created by the function `create_nc_results_time`
+    
+## Examples
+```julia-repl
+julia> lonyear_fid, lat_year_fid, times_year, field_year_fid, error_year = 
+read_results(resfile_year_fidmarchicus)
+```
+"""
+function read_results(resfile::String)
+    NCDataset(resfile, "r") do ds
+        lon = ds["lon"][:]
+        lat = ds["lat"][:]
+        times = ds["time"][:]
+        field = ds["abundance"][:]
+        error = ds["error"][:]
+        
+        return lon::Vector{Union{Missing, Float32}}, lat::Vector{Union{Missing, Float32}}, 
+            times::Vector{DateTime}, 
+            field::Array{Union{Missing, Float64}, 3}, 
+            error::Array{Union{Missing, Float64}, 3}
+    end
+end
+
+"""
+    compute_time_mean(field)
+
+Compute the mean of the field, discarding the NaN values
+
+## Examples
+```julia-repl
+julia> fmean1 = compute_time_mean(field_year_fid)
+```
+"""
+function compute_time_mean(field::Array{Union{Missing, Float64}, 3})
+    nlon, nlat, ntimes = size(field)
+    fieldmean = zeros(ntimes)
+    for itt = 1:ntimes
+        fieldmean[itt] = mean(filter(!isnan, field[:,:,itt]))
+    end
+    return fieldmean
+end
 
 
 end

@@ -7,7 +7,7 @@ mpl.style.use("../src/calanus.mplstyle")
 # Type of analysis
 run_year = true
 run_month = true
-analysistype = "multivariate"
+analysistype = ""
 
 title = "Calanus interpolation parameters"
 
@@ -19,16 +19,16 @@ usecartopy = false
 yearmin = 1959
 yearmax = 2018
 domain = [-20.5, 11.75, 41.25, 67.0]
-dlon = 2.
-dlat = 2.
+dlon = 0.25
+dlat = 0.25
 @info("Workig at resoluton $(dlon)° X $(dlat)°")
 
 # Directories
 datadir = "../data/"
 figdir = "../figures/$(analysistype)/"
-resdir = "../results/$(analysistype)/2deg/"
+resdir = "../results/$(analysistype)/025deg/"
 datafigdir = joinpath(figdir, "observations/")
-resfigdir = joinpath(figdir, "2deg/")
+resfigdir = joinpath(figdir, "025deg/")
 wodfigdir = joinpath(figdir, "WOD/")
 resdirnc = joinpath(resdir, "netCDF")
 resdirtif = joinpath(resdir, "GeoTIFF")
@@ -51,7 +51,7 @@ temperaturefileURL = "https://dox.ulg.ac.be/index.php/s/aksXIhEFk41npCb/download
 # Download if necessary
 isfile(datafile) ? @info("Observation file already downloaded") : download(datafileURL, datafile)
 isfile(bathyfile) ? @info("Bathymetry file already downloaded") : download(bathyfileURL, datbathyfile)
-(analysistype == "multivariate") & !(isfile(temperaturefile)) ? download(temperaturefile, temperaturefileURL) : @info("Temperature file already downloaded")
+(analysistype == "multivariate") & !(isfile(temperaturefile)) ? download(temperaturefileURL, temperaturefile) : @info("Temperature file already downloaded")
 
 # Colors 
 # (to keep homogeneity accross the figures)

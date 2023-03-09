@@ -131,6 +131,7 @@ function create_nc_results(filename::String, lons, lats, times, field, L, epsilo
         nctime.attrib["missing_value"] = Float32(valex)
         nctime.attrib["units"] = "days since 1950-01-01 00:00:00"
         nctime.attrib["long_name"] = "time"
+        nctime.attrib["calendar"] = "gregorian"
         
         nclon = defVar(ds,"lon", Float32, ("lon",))
         # nclon.attrib["missing_value"] = Float32(valex)
@@ -183,8 +184,8 @@ function create_nc_results(filename::String, lons, lats, times, field, L, epsilo
 		ds.attrib["language"] = "Julia $(juliaversion)"
 		ds.attrib["Conventions"] = "CF-1.7"
 		ds.attrib["netcdf_version"] = "4"
-        ds.attrib["Correlation lengh"] = L
-        ds.attrib["Noise-to-signal ratio"] = epsilon2
+        ds.attrib["correlation_lengh"] = L
+        ds.attrib["noise_to_signal_ratio"] = epsilon2
 
         # Define variables
         ncfield[:] = field

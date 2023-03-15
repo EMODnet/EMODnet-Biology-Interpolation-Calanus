@@ -116,7 +116,7 @@ function create_nc_results(filename::String, lons, lats, times, field, L, epsilo
         ncfield.attrib["_FillValue"] = Float64(valex)
 		ncfield.attrib["units"] = "1"
         ncfield.attrib["long_name"] = long_name
-		ncfield.attrib["coordinates"] = "lat lon"
+		# ncfield.attrib["coordinates"] = "lat lon"
 		ncfield.attrib["grid_mapping"] = "crs" ;
         
         ncerror = defVar(ds, "$(varname)_error", Float64, ("lon", "lat"))
@@ -124,7 +124,7 @@ function create_nc_results(filename::String, lons, lats, times, field, L, epsilo
         ncerror.attrib["_FillValue"] = Float64(valex)
 		ncerror.attrib["units"] = "1"
         ncerror.attrib["long_name"] = "Relative error on $(long_name)"
-		ncerror.attrib["coordinates"] = "lat lon"
+		# ncerror.attrib["coordinates"] = "lat lon"
 		ncerror.attrib["grid_mapping"] = "crs" ;
         
         nctime = defVar(ds, "time", Int64, ("time",))
@@ -182,7 +182,7 @@ function create_nc_results(filename::String, lons, lats, times, field, L, epsilo
 		ds.attrib["tool_version"] = DIVAndversion
 		ds.attrib["tool_doi"] = "10.5281/zenodo.7016823"
 		ds.attrib["language"] = "Julia $(juliaversion)"
-		ds.attrib["Conventions"] = "CF-1.7"
+		ds.attrib["Conventions"] = "CF-1.8"
 		ds.attrib["netcdf_version"] = "4"
         ds.attrib["correlation_lengh"] = L
         ds.attrib["noise_to_signal_ratio"] = epsilon2
@@ -197,7 +197,7 @@ function create_nc_results(filename::String, lons, lats, times, field, L, epsilo
 end
 
 """
-    create_nc_results_time(filename, lons, lats)
+    create_nc_results_time(filename, lons, lats, speciesname)
 
 Create a new netCDF file `filename` with the coordinates `lons`, `lats` that will 
 be filled with interpolated field and error field.
@@ -207,12 +207,12 @@ be filled with interpolated field and error field.
 julia> create_nc_results_time("Bacteriastrum_interp.nc", lons, lats)
 ```
 """
-function create_nc_results_time(filename::String, lons, lats, speciesname="";
+function create_nc_results_time(filename::String, lons, lats, ntimes, speciesname::Array=["",];
     valex=-999.9,
     varname::String = "abundance",
     long_name::String = "Interpolated abundance",
 	domain::Array = [-180., 180., -90., 90.],
-	aphiaID::Int32 = Int32(0),
+	aphiaID::Array = [0, ],
     L, epsilon2
     )
     Dataset(filename, "c") do ds
@@ -220,33 +220,59 @@ function create_nc_results_time(filename::String, lons, lats, speciesname="";
         # Dimensions
         ds.dim["lon"] = length(lons)
         ds.dim["lat"] = length(lats)
-        ds.dim["time"] = Inf # unlimited dimension
+        ds.dim["aphiaid"] = length(speciesname)
+        ds.dim["stringlen"] = 80
+        ds.dim["time"] = ntimes
 
         # Declare variables
-		nccrs = defVar(ds, "crs", Int64, ())
-    	nccrs.attrib["grid_mapping_name"] = "latitude_longitude"
-    	nccrs.attrib["semi_major_axis"] = 6371000.0 
-    	nccrs.attrib["inverse_flattening"] = 0 
 
-        ncfield = defVar(ds, varname, Float64, ("lon", "lat", "time"))
+        ncaphiaid = defVar(ds, "aphiaid", Int32, ("aphiaid",))
+        ncaphiaid.attrib["long_name"] = "Life Science Identifier - World Register of Marine Species"
+        # ncaphiaid.attrib["units"] = "level"
+
+        nctaxonname = defVar(ds, "taxon_name", Char, ("stringlen", "aphiaid"))
+        nctaxonname.attrib["long_name"] = "Scientific name of the taxa"
+        nctaxonname.attrib["standard_name"] = "biological_taxon_name"
+    
+        nctaxon_lsid = defVar(ds, "taxon_lsid", Char, ("stringlen", "aphiaid"))
+        nctaxon_lsid.attrib["standard_name"] = "biological_taxon_lsid"
+        nctaxon_lsid.attrib["long_name"] = "Life Science Identifier - World Register of Marine Species"
+
+		nccrs = defVar(ds, "crs", Int64, ())
+        nccrs.attrib["long_name"] = "Coordinate Reference System" 
+        nccrs.attrib["geographic_crs_name"] = "WGS 84"
+        nccrs.attrib["grid_mapping_name"] = "latitude_longitude" 
+        nccrs.attrib["reference_ellipsoid_name"] = "WGS 84" 
+        nccrs.attrib["horizontal_datum_name"] = "WGS 84"
+        nccrs.attrib["prime_meridian_name"] = "Greenwich" 
+        nccrs.attrib["longitude_of_prime_meridian"] = 0.
+        nccrs.attrib["semi_major_axis"] = 6378137.
+        nccrs.attrib["semi_minor_axis"] = 6356752.31424518
+        nccrs.attrib["inverse_flattening"] = 298.257223563
+        nccrs.attrib["spatial_ref"] = "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]" ;
+        nccrs.attrib["GeoTransform"] = "-180 0.08333333333333333 0 90 0 -0.08333333333333333 "
+
+                                                # "aphiaid", "time", "lat", "lon"
+                                                # "lon", "lat", "time", "aphiaid"
+        ncfield = defVar(ds, varname, Float64, ("lon", "lat", "time", "aphiaid"))
         ncfield.attrib["missing_value"] = Float64(valex)
         ncfield.attrib["_FillValue"] = Float64(valex)
 		ncfield.attrib["units"] = "1"
         ncfield.attrib["long_name"] = long_name
-		ncfield.attrib["coordinates"] = "lat lon time"
+		# ncfield.attrib["coordinates"] = "time lat lon"
 		ncfield.attrib["grid_mapping"] = "crs" ;
         
-        ncerror = defVar(ds, "error", Float64, ("lon", "lat", "time"))
+        ncerror = defVar(ds, "error", Float64, ("lon", "lat", "time", "aphiaid"))
         ncerror.attrib["missing_value"] = Float64(valex)
         ncerror.attrib["_FillValue"] = Float64(valex)
 		ncerror.attrib["units"] = "1"
         ncerror.attrib["long_name"] = "Relative error on $(long_name)"
-		ncerror.attrib["coordinates"] = "lat lon time"
+		# ncerror.attrib["coordinates"] = "time lat lon"
 		ncerror.attrib["grid_mapping"] = "crs" ;
         
-        nclon = defVar(ds,"lon", Float32, ("lon",))
+        nclon = defVar(ds,"lon", Float64, ("lon",))
         # nclon.attrib["missing_value"] = Float32(valex)
-        nclon.attrib["_FillValue"] = Float32(valex)
+        nclon.attrib["_FillValue"] = Float64(valex)
         nclon.attrib["units"] = "degrees_east"
         nclon.attrib["long_name"] = "Longitude"
 		nclon.attrib["standard_name"] = "longitude"
@@ -255,9 +281,9 @@ function create_nc_results_time(filename::String, lons, lats, speciesname="";
 		nclon.attrib["valid_min"] = -180.0 ;
 		nclon.attrib["valid_max"] = 180.0 ;
 
-        nclat = defVar(ds,"lat", Float32, ("lat",))
+        nclat = defVar(ds,"lat", Float64, ("lat",))
         # nclat.attrib["missing_value"] = Float32(valex)
-        nclat.attrib["_FillValue"] = Float32(valex)
+        nclat.attrib["_FillValue"] = Float64(valex)
         nclat.attrib["units"] = "degrees_north"
 		nclat.attrib["long_name"] = "Latitude"
 		nclat.attrib["standard_name"] = "latitude"
@@ -266,19 +292,20 @@ function create_nc_results_time(filename::String, lons, lats, speciesname="";
 		nclat.attrib["valid_min"] = -90.0 ;
 		nclat.attrib["valid_max"] = 90.0 ;
         
-        nctime = defVar(ds,"time", Float32, ("time",))
+        nctime = defVar(ds,"time", Float64, ("time",))
         #nctime.attrib["_FillValue"] = Float32(valex)
         nctime.attrib["units"] = "degrees_north"
 		nctime.attrib["long_name"] = "Time"
 		nctime.attrib["standard_name"] = "time"
         nctime.attrib["units"] = "days since 1950-01-01 00:00:00"
 		nctime.attrib["axis"] = "T"
+        nctime.attrib["calendar"] = "gregorian"
 
         # Global attributes
 		ds.attrib["Species_scientific_name"] = speciesname
 		ds.attrib["Species_aphiaID"] = aphiaID
-		ds.attrib["title"] = "$(long_name) based on presence/absence of $(speciesname)"
-		ds.attrib["institution"] = "GHER - University of Liege, MBA"
+		ds.attrib["title"] = "$(long_name) based on presence/absence of $(speciesname[1]) and $(speciesname[2])"
+		ds.attrib["institution"] = "University of Liege and Marine Biological Association"
 		ds.attrib["source"] = "Spatial interpolation of presence/absence data"
         ds.attrib["project"] = "EMODnet Biology Phase IV"
         ds.attrib["comment"] = "Original data prepared by P. Helaouet (Marine Biological Association)"
@@ -295,20 +322,28 @@ function create_nc_results_time(filename::String, lons, lats, speciesname="";
 		ds.attrib["geospatial_lat_units"] = "degrees_north"
 		ds.attrib["geospatial_lon_units"] = "degrees_east"
 		ds.attrib["license"] = "GNU General Public License v2.0"
-		ds.attrib["citation"] = "to be filled"
-		ds.attrib["acknowledgement"] = "to be filled"
+		ds.attrib["citation"] = "Troupin, Charles; Barth, Alexander; Helaouet, Pierre (2023). Gridded maps of Calanus finmarchicus and Calanus helgolandicus"
+		ds.attrib["acknowledgement"] = "European Marine Observation Data Network (EMODnet) Biology project (EMFF/2019/1.3.1.9/Lot 6/SI2.837974), funded by the European Union under Regulation (EU) No 508/2014 of the European Parliament and of the Council of 15 May 2014 on the European Maritime and Fisheries Fund"
 		ds.attrib["tool"] = "DIVAnd"
 		ds.attrib["tool_version"] = DIVAndversion
 		ds.attrib["tool_doi"] = "10.5281/zenodo.7016823"
 		ds.attrib["language"] = "Julia $(juliaversion)"
-		ds.attrib["Conventions"] = "CF-1.7"
+		ds.attrib["Conventions"] = "CF-1.8"
 		ds.attrib["netcdf_version"] = "4"
-        ds.attrib["Correlation length (degrees)"] = L
-        ds.attrib["Noise-to-signal ratio"] = epsilon2
+        ds.attrib["correlation_length"] = L
+        ds.attrib["correlation_length_units"] = "degrees"
+        ds.attrib["noise_to_signal_ratio"] = epsilon2
+        ds.attrib["noise_to_signal_ratio_units"] = ""
 
         # Define variables
         nclon[:] = collect(lons)
         nclat[:] = collect(lats);
+
+        ncaphiaid[:] = aphiaID
+        nctaxonname[1:length(speciesname[1]),1] = collect.(speciesname[1]);
+        nctaxonname[1:length(speciesname[2]),2] = collect.(speciesname[2]);
+        nctaxon_lsid[1:length(speciesname[1]),1] = collect.(speciesname[1]);
+        nctaxon_lsid[1:length(speciesname[2]),2] = collect.(speciesname[2]);
 
     end
 end;

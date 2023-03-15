@@ -19,16 +19,16 @@ usecartopy = false
 yearmin = 1959
 yearmax = 2018
 domain = [-20.5, 11.75, 41.25, 67.0]
-dlon = 0.25
-dlat = 0.25
+dlon = 1.
+dlat = 1.
 @info("Workig at resoluton $(dlon)° X $(dlat)°")
 
 # Directories
 datadir = "../data/"
 figdir = "../figures/$(analysistype)/"
-resdir = "../results/$(analysistype)/025deg/"
+resdir = "../results/$(analysistype)/1deg_test/"
 datafigdir = joinpath(figdir, "observations/")
-resfigdir = joinpath(figdir, "025deg/")
+resfigdir = joinpath(figdir, "1deg_test/")
 wodfigdir = joinpath(figdir, "WOD/")
 resdirnc = joinpath(resdir, "netCDF")
 resdirtif = joinpath(resdir, "GeoTIFF")

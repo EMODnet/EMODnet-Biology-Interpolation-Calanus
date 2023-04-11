@@ -56,6 +56,15 @@ The formats are adopted for this project:
 1. netCDF, following the Climate and Forecast conventions for the metadata and attributes
 2. geoTIFF, more widely used in different scientific communities.
 
+### Citation and download link
+
+This product should be cited as:
+
+Troupin C (2023) Spatial interpolation of Calanus finmarchicus and Calanus helgolandicus observations in the North Sea. Integrated data products created under the European Marine Observation Data Network (EMODnet) Biology project Phase IV (EMFF/2019/1.3.1.9/Lot 6/SI2.837974), funded by the by the European Union under Regulation (EU) No 508/2014 of the European Parliament and of the Council of 15 May 2014 on the European Maritime and Fisheries Fund.
+
+Available to download in:
+
+[Integrated Marine Information System (IMIS)](https://www.vliz.be/imis?dasid=8220)
 
 ## Useful references
 

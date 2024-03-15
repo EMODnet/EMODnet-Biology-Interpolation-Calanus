@@ -64,7 +64,10 @@ Troupin C (2023) Spatial interpolation of Calanus finmarchicus and Calanus helgo
 
 Available to download in:
 
-[Integrated Marine Information System (IMIS)](https://www.vliz.be/imis?dasid=8220)
+EMODnet Catalogue=> https://emodnet.ec.europa.eu/geonetwork/srv/eng/catalog.search#/metadata/e321abf8758938d9b1de9dc4946ea7c356ff4fa9
+VLIZ catalogue=> https://www.vliz.be/imis?dasid=8220
+EMOdnet Viewer=> https://emodnet.ec.europa.eu/geoviewer/?layers=12979:1:1&basemap=ebwbl&active=12979&bounds=-8108447.236064361,3082466.8149999995,11062488.39206436,11459766.29&filters=&projection=EPSG:3857
+EMODnet ERDDAP=> https://erddap.emodnet.eu/erddap/files/biology_8220_a8b5_8cec_1c23/calanus_finmarchicus_helgolandicus_year.nc
 
 ## Useful references
 
